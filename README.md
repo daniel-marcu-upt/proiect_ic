@@ -8,7 +8,7 @@ Web application for handling bookings of electrical cars and charging stations:
 - each admin can edit the list of plug-ins available
 
 
-Technology usesd:
+Technology used:
 - Frontend: React(JavaScript)
 - Backend: Symfony(PHP)
 - Database administration: PhpMyAdmin(MySQL)
