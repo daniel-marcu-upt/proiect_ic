@@ -8,8 +8,10 @@ function MyCars() {
   return (
     <div>
       <Navbar username="Daniel"/>
-
       <center>
+        <h1 className='mycars-h1'>
+          My Cars
+        </h1>
         <br/>
         <Button color="success" variant="contained">Add car</Button>
       </center>

@@ -8,8 +8,10 @@ function EditCharger() {
   return (
     <div>
       <Navbar extra username="Daniel"/>
-
       <center>
+        <h1 className='editcharger-h1'>
+          Edit Charger
+        </h1>
         <br/>
         <Button color="success" variant="contained">Save</Button>
       </center>

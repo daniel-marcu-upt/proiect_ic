@@ -7,10 +7,12 @@ import TextField from '@mui/material/TextField';
 function EditCar() {
   return (
     <div>
-      <Navbar username="Daniel"/>
-
+      <Navbar username="Daniel" />
       <center>
-        <br/>
+        <h1 className='editcar-h1'>
+          Edit Car
+        </h1>
+        <br />
         <Button color="success" variant="contained">Save</Button>
       </center>
     </div>

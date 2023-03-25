@@ -8,8 +8,10 @@ function MyChargers() {
   return (
     <div>
       <Navbar extra username="Daniel"/>
-
       <center>
+        <h1 className='mychargers-h1'>
+          My Chargers
+        </h1>
         <br/>
         <Button color="success" variant="contained">Add charger</Button>
       </center>
