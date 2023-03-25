@@ -1,51 +1,55 @@
-import Signup_image from './EV-charging.jpg';
+import Signup_image from './EV-charging.png';
 import './Signup.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function Signup() {
   return (
-    <div className="Signup">
+    <div className="signup">
       <meta name="viewport" content="initial-scale=1, width=device-width" />
-      <header className="header">
-        <div className="left">
-          <img src={Signup_image} className="image" alt="logo" />
+      <header className="signup-header">
+        <div className="signup-left">
+          <img src={Signup_image} className="signup-image" alt="logo" />
         </div>
-        <div className="right">
-          <h1>
+        <div className="signup-right">
+          <h1 className="signup-h1">
             Sign Up
           </h1>
             <TextField
-              id="email-input"
+              id="signup-email-input"
               label="Email"
               type="email"
               autoComplete="email"
             />
             <br/><br/><br/>
             <TextField
-              id="username-input"
+              id="signup-username-input"
               label="Username"
               type="text"
               autoComplete="username"
             />
             <br/><br/><br/>
             <TextField
-              id="password-input"
+              id="signup-password-input"
               label="Password"
               type="password"
               autoComplete="new-password"
             />
             <br/><br/><br/>
             <TextField
-              id="password-input"
+              id="signup-password-input"
               label="Repeat password"
               type="password"
               autoComplete="new-password"
             />
-            <p>
+            <br/><br/>
+            <FormControlLabel control={<Checkbox size="medium"/>} label="I own charging stations" />
+            <p className="signup-p">
               Already have an account?
             <a
-              className="Signin-link"
+              className="signup-link"
               href=""
               rel="noopener noreferrer"
             >
@@ -53,7 +57,7 @@ function Signup() {
             </a>
             </p>
             <br/>
-            <Button variant="contained">Submit</Button>
+            <Button color="success" variant="contained">Submit</Button>
         </div>
       </header>
     </div>

@@ -1,13 +1,13 @@
-.Signup {
+.signup {
   text-align: center;
 }
 
-.image {
-  width: 50vmin;
+.signup-image {
+  width: 70vmin;
   pointer-events: none;
 }
 
-.header {
+.signup-header {
   background-color: #f3f3f3;
   min-height: 100vh;
   display: flex;
@@ -18,24 +18,24 @@
   color: black;
   font-family: Arial, Helvetica, sans-serif;
 }
-.left{
+.signup-left{
   float: right;
   margin-right: 5vmin;
 }
-.right{
+.signup-right{
   float: left;
   margin-left: 5vmin;
   text-align: left;
   font-size: calc(7px + 1vmin);
 }
-p{
+.signup-p{
   text-align: right;
   margin-top:0;
 }
-h1{
+.signup-h1{
   text-align: center;
   font-size: calc(20px + 4vmin);
 }
-#password-input, #username-input, #email-input{
+#signup-password-input, #signup-username-input, #signup-email-input{
   width: 40vmin;
 }

@@ -1,13 +1,13 @@
-.Signin {
+.signin {
   text-align: center;
 }
 
-.image {
-  width: 50vmin;
+.signin-image {
+  width: 70vmin;
   pointer-events: none;
 }
 
-.header {
+.signin-header {
   background-color: #f3f3f3;
   min-height: 100vh;
   display: flex;
@@ -18,24 +18,24 @@
   color: black;
   font-family: Arial, Helvetica, sans-serif;
 }
-.left{
+.signin-left{
   float: right;
   margin-right: 5vmin;
 }
-.right{
+.signin-right{
   float: left;
   margin-left: 5vmin;
   text-align: left;
   font-size: calc(7px + 1vmin);
 }
-p{
+.signin-p{
   text-align: right;
   margin-top:0;
 }
-h1{
+.signin-h1{
   text-align: center;
   font-size: calc(20px + 4vmin);
 }
-#password-input, #username-input{
+#signin-password-input, #signin-username-input{
   width: 40vmin;
 }

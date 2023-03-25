@@ -4,12 +4,17 @@ import './index.css';
 import App from './App/App';
 import Signup from './Signup/Signup';
 import Signin from './Signin/Signin';
+import MyCars from './MyCars/MyCars';
+import EditCar from './EditCar/EditCar';
+import Chargers from './Chargers/Chargers';
+import MyChargers from './MyChargers/MyChargers';
+import EditCharger from './EditCharger/EditCharger';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Signup />
+    <MyCars />
   </React.StrictMode>
 );
 
