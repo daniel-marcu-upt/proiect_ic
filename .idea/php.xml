@@ -52,6 +52,32 @@
       <path value="$PROJECT_DIR$/backend/vendor/symfony/stopwatch" />
       <path value="$PROJECT_DIR$/backend/vendor/symfony/maker-bundle" />
       <path value="$PROJECT_DIR$/backend/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/backend/vendor/api-platform/core" />
+      <path value="$PROJECT_DIR$/backend/vendor/psr/link" />
+      <path value="$PROJECT_DIR$/backend/vendor/willdurand/negotiation" />
+      <path value="$PROJECT_DIR$/backend/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/password-hasher" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/web-link" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/backend/vendor/nelmio/cors-bundle" />
+      <path value="$PROJECT_DIR$/backend/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/backend/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/backend/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/backend/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/backend/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/backend/vendor/webmozart/assert" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
