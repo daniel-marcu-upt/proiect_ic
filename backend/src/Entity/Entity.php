@@ -2,7 +2,7 @@
 
 namespace Doctrine\ORM\Mapping;
 
-class Entity
+#[\Attribute] class Entity
 {
 
 }
