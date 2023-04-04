@@ -63,7 +63,7 @@ function Navbar({extra, username}) {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              HOME
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,7 +97,7 @@ function Navbar({extra, username}) {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <a className='navbar-a' href={'/'+page}><Typography textAlign="center">{page}</Typography></a>
                   </MenuItem>
                 ))}
               </Menu>
@@ -123,6 +123,7 @@ function Navbar({extra, username}) {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
+                <a className='navbar-a' href={'/'+page}>
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
@@ -130,6 +131,7 @@ function Navbar({extra, username}) {
                 >
                   {page}
                 </Button>
+                </a>
               ))}
             </Box>
 
@@ -157,7 +159,9 @@ function Navbar({extra, username}) {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <a className='navbar-a' href={'/'+setting}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </a>
                   </MenuItem>
                 ))}
               </Menu>

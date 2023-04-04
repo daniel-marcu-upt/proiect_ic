@@ -12,14 +12,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-function createData(plate, plug, details/*, booking*/, del) {
-  return { plate, plug, details/*, booking*/, del };
+function createData(plate, plug, details/*, booking*/) {
+  return { plate, plug, details/*, booking*/ };
 }
 
 const rows = [
-  createData("TM13DSA", "PLUG 1", "/details1", "/delete1"),
-  createData("TM34ASD", "PLUG 2", "/details2", "/delete2"),
-  createData("TM43SDA", "PLUG 1", "/details3", "/delete3"),
+  createData("TM13DSA", "PLUG 1", "/EditCar/1", "/delete1"),
+  createData("TM34ASD", "PLUG 2", "/EditCar/2", "/delete2"),
+  createData("TM43SDA", "PLUG 1", "/EditCar/3", "/delete3"),
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,7 +58,6 @@ function MyCars() {
                 <StyledTableCell align="center">Plug Type</StyledTableCell>
                 <StyledTableCell align="center">Details</StyledTableCell>
                 {/* <StyledTableCell align="center">Booking</StyledTableCell> */}
-                <StyledTableCell align="center">Delete</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -78,11 +77,6 @@ function MyCars() {
                       <a className='mycars-a' href={row.booking}>Booking</a>
                     </Button>
                   </StyledTableCell> */}
-                  <StyledTableCell align="center">
-                    <Button color="error" variant="contained">
-                      <a className='mycars-a' href={row.del}>Delete</a>
-                    </Button>
-                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
