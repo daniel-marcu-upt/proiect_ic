@@ -1,0 +1,15 @@
+.mychargers-h1{
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: calc(20px + 4vmin);
+}  
+.mychargers-a{
+  color:white;
+  text-decoration: none;
+}
+.mychargers-table{
+  width: 80vw !important;
+}
+.mychargers-container{
+  box-shadow: none !important;
+}

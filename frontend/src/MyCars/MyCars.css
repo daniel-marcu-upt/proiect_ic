@@ -1,0 +1,15 @@
+.mycars-h1{
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: calc(20px + 4vmin);
+}
+.mycars-a{
+  color:white;
+  text-decoration: none;
+}
+.mycars-table{
+  width: 80vw !important;
+}
+.mycars-container{
+  box-shadow: none !important;
+}
