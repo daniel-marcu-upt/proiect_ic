@@ -3,3 +3,13 @@
     text-align: center;
     font-size: calc(20px + 4vmin);
   }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

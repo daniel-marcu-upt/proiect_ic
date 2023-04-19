@@ -12,6 +12,21 @@ function EditCar() {
         <h1 className='editcar-h1'>
           Edit Car
         </h1>
+        
+        <TextField
+          label="Plate"
+          id="plate"
+          sx={{ m: 1, width: '50ch' }}
+          variant="standard"
+        />
+        <br/>
+        <TextField
+          label="Plug type"
+          id="plug"
+          sx={{ m: 1, width: '50ch' }}
+          variant="standard"
+        />
+        <br/>
         <br />
         <Button color="success" variant="contained">Save</Button>
       </center>
