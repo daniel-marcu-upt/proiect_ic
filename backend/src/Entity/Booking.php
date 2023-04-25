@@ -2,115 +2,51 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\BookingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
+#[ApiResource]
 class Booking
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'dateinterval')]
-    private $duration;
+    #[ORM\Column]
+    private ?\DateInterval $duration = null;
 
-
-    #[ORM\Column(type: 'datetime')]
-    private $startTime;
-
-    #[ORM\ManyToOne(targetEntity: Car::class, inversedBy: 'bookings')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $car_id;
-
-    #[ORM\ManyToOne(targetEntity: Plug::class)]
-    #[ORM\JoinColumn(nullable: true)]
-    private $plug_id;
-
-    #[ORM\OneToOne(mappedBy: 'booking_id', targetEntity: Car::class, cascade: ['persist', 'remove'])]
-    private $car;
-
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $startTime = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCarId(): ?Car
-    {
-        return $this->car_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDuration()
+    public function getDuration(): ?\DateInterval
     {
         return $this->duration;
     }
 
-    /**
-     * @param mixed $duration
-     */
-    public function setDuration($duration): void
+    public function setDuration(\DateInterval $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStartTime()
+    public function getStartTime(): ?\DateTimeInterface
     {
         return $this->startTime;
     }
 
-    /**
-     * @param mixed $startTime
-     */
-    public function setStartTime($startTime): void
+    public function setStartTime(\DateTimeInterface $startTime): self
     {
         $this->startTime = $startTime;
-    }
-
-    public function setCarId(?Car $car_id): self
-    {
-        $this->car_id = $car_id;
-
-        return $this;
-    }
-
-    public function getPlugId(): ?Plug
-    {
-        return $this->plug_id;
-    }
-
-    public function setPlugId(?Plug $plug_id): self
-    {
-        $this->plug_id = $plug_id;
-
-        return $this;
-    }
-
-    public function getCar(): ?Car
-    {
-        return $this->car;
-    }
-
-    public function setCar(?Car $car): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($car === null && $this->car !== null) {
-            $this->car->setBookingId(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($car !== null && $car->getBookingId() !== $this) {
-            $car->setBookingId($this);
-        }
-
-        $this->car = $car;
 
         return $this;
     }

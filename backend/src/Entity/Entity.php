@@ -1,6 +1,6 @@
 <?php
 
-namespace Doctrine\ORM\Mapping;
+namespace App\Entity;
 
 #[\Attribute] class Entity
 {

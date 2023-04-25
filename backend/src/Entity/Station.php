@@ -2,28 +2,30 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\StationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StationRepository::class)]
+#[ApiResource]
 class Station
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'integer')]
-    private $latitude;
+    #[ORM\Column]
+    private ?int $latitude = null;
 
-    #[ORM\Column(type: 'integer')]
-    private $longitude;
+    #[ORM\Column]
+    private ?int $longitude = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $location;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $location = null;
 
     public function getId(): ?int
     {
