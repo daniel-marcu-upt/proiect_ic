@@ -2,8 +2,42 @@ import Signin_image from './EV-charging.png';
 import './Signin.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import {useHistory} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 function Signin() {
+  let history = useHistory();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [requestMess, setRequestMess] = useState('');
+
+  const handleRegister = async (e) => {
+    setRequestMess('');
+    e.preventDefault();
+    if(username !== '' && password !== '') {
+      try {
+        console.log(JSON.stringify({username, password}));
+        const response = await fetch("https://127.0.0.1:8002/login", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({username, password}),
+        });
+        if (!response.ok) {
+          const errorData = await response.json();
+          setRequestMess(errorData.message);
+          console.log(errorData.message);
+          throw new Error(errorData.message);
+        }
+        history.push('/');
+        history.go(0);
+        // Register successful, redirect to login page or do something else
+      } catch (error) {
+        setError(error.message);
+      }
+    }
+  };
+
   return (
     <div className="signin">
       <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -20,6 +54,9 @@ function Signin() {
               label="Username"
               type="text"
               autoComplete="username"
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <br/><br/><br/>
             <TextField
@@ -27,8 +64,12 @@ function Signin() {
               label="Password"
               type="password"
               autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <p className="signin-p">
+              <br/>
               Don't have an account?
             <a
               className="signin-link"
@@ -39,7 +80,9 @@ function Signin() {
             </a>
             </p>
             <br/>
-            <Button color="success" variant="contained">Submit</Button>
+            <Button color="success" variant="contained" onClick={handleRegister}>Submit</Button>
+          <br/><br/>
+          {requestMess}
         </div>
       </header>
     </div>

@@ -2,26 +2,24 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\PlugRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlugRepository::class)]
+#[ApiResource]
 class Plug
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $type;
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private $status;
-
-    #[ORM\ManyToOne(targetEntity: Station::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $station_id;
+    #[ORM\Column]
+    private ?bool $status = null;
 
     public function getId(): ?int
     {
@@ -40,7 +38,7 @@ class Plug
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function isStatus(): ?bool
     {
         return $this->status;
     }
@@ -48,18 +46,6 @@ class Plug
     public function setStatus(bool $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getStationId(): ?Station
-    {
-        return $this->station_id;
-    }
-
-    public function setStationId(?Station $station_id): self
-    {
-        $this->station_id = $station_id;
 
         return $this;
     }
