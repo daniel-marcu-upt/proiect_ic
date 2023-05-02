@@ -22,7 +22,7 @@ class LoginController extends AbstractController
         $user->setEmail('default');
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
-        $user->setName('default');
+//        $user->setName('default');
 
         $userRepo = $entityManager->getRepository(User::class);
         $existingUser = $userRepo->findOneBy(['username' => $user->getUsername()]);
@@ -40,8 +40,8 @@ class LoginController extends AbstractController
             'email' => $user->getEmail(),
             'first_name' => $user->getUsername(),
             'last_name' => $user->getPassword(),
-            'roles' => $user->getRoles(),
-            'name' => $user->getName(),
+//            'roles' => $user->getRoles(),
+//            'name' => $user->getName(),
         ]);
     }
 
