@@ -1,6 +1,7 @@
 import logo from '../logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 import Signup from '../Signup/Signup';
 import Signin from '../Signin/Signin';
@@ -9,6 +10,54 @@ import EditCar from '../EditCar/EditCar';
 import Chargers from '../Chargers/Chargers';
 import MyChargers from '../MyChargers/MyChargers';
 import EditCharger from '../EditCharger/EditCharger';
+
+const cookies = new Cookies();
+
+export function saveCredentials(user, pass){
+    cookies.set('username', user, { path: '/' });
+    cookies.set('password', pass, { path: '/' });
+}
+export function deleteCredentials(){
+    cookies.remove('username');
+    cookies.remove('password');
+}
+export function checkAuth(){
+    var user = cookies.get("username");
+    if(user != undefined)
+      return true;
+    else
+      return false;
+}
+
+
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return checkAuth() === true ? (
+          children
+        ) : (
+          <Redirect to="/SignIn" />
+        );
+      }}
+    />
+  );
+}
+function LogoutRoute({ children, ...rest }) {
+  deleteCredentials();
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return  (
+          <Redirect to="/SignIn" />
+        );
+      }}
+    />
+  );
+}
+
 
 function App() {
   return (
@@ -21,24 +70,27 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/MyCars">
+          <PrivateRoute path="/MyCars">
             <MyCars />
-          </Route>
-          <Route path="/EditCar">
+          </PrivateRoute>
+          <PrivateRoute path="/EditCar">
             <EditCar />
-          </Route>
-          <Route path="/Chargers">
+          </PrivateRoute>
+          <PrivateRoute path="/Chargers">
             <Chargers />
-          </Route>
-          <Route path="/MyChargers">
+          </PrivateRoute>
+          <PrivateRoute path="/MyChargers">
             <MyChargers />
-          </Route>
-          <Route path="/EditCharger">
+          </PrivateRoute>
+          <PrivateRoute path="/EditCharger">
             <EditCharger />
-          </Route>
-          <Route path="/">
+          </PrivateRoute>
+          <LogoutRoute path="/logout">
+            <Signin />
+          </LogoutRoute>
+          <PrivateRoute path="/">
             <MyCars />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </BrowserRouter>
     </div>

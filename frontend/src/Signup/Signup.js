@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {useEffect, useState} from "react";
 import { useHistory } from 'react-router-dom';
+import {checkAuth, saveCredentials, deleteCredentials} from "../App/App";
 
 function Signup() {
   let history = useHistory();
@@ -20,7 +21,7 @@ function Signup() {
     e.preventDefault();
     if(username !== '' && password !== '' && email !== '') {
       try {
-        const response = await fetch("https://127.0.0.1:8002/register", {
+        const response = await fetch("http://127.0.0.1:8002/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({username, email, password}),
@@ -30,6 +31,7 @@ function Signup() {
           setUserExist(errorData.message);
           throw new Error(errorData.message);
         }
+        saveCredentials(username, password);
         history.push('/');
         history.go(0);
         // Register successful, redirect to login page or do something else
@@ -76,7 +78,7 @@ function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <br/><br/><br/>
+            {/* <br/><br/><br/> */}
             {/*<TextField*/}
             {/*  id="signup-password-input"*/}
             {/*  label="Repeat password"*/}
@@ -85,11 +87,14 @@ function Signup() {
             {/*/>*/}
             <br/><br/>
             <FormControlLabel control={<Checkbox size="medium"/>} label="I own charging stations" />
+
+            <p className='signup-error-p' >{userExist}</p>
+            
             <p className="signup-p">
               Already have an account?
             <a
               className="signup-link"
-              href=""
+              href="/SignIn"
               rel="noopener noreferrer"
             >
               Sign in!
@@ -103,7 +108,6 @@ function Signup() {
                 onClick={handleRegister}
             >Submit</Button>
           <br/><br/>
-          {userExist}
         </div>
       </header>
     </div>
