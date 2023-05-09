@@ -24,7 +24,6 @@ class RegistrationController extends AbstractController
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
-//        $user->setName("default");
 
         $userRepo = $entityManager->getRepository(User::class);
         $existingUser = $userRepo->findOneBy(['username' => $user->getUsername()]);
@@ -48,8 +47,6 @@ class RegistrationController extends AbstractController
             'email' => $user->getEmail(),
             'first_name' => $user->getUsername(),
             'last_name' => $user->getPassword(),
-//            'roles' => $user->getRoles(),
-//            'name' => $user->getName(),
         ]);
     }
 }

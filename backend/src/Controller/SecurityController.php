@@ -19,8 +19,6 @@ class SecurityController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        dd($request);
-
         $user = new User();
         $user->setEmail($data['email']);
         $user->setUsername($data['userName']);
@@ -37,8 +35,6 @@ class SecurityController extends AbstractController
 //        $userRepo = $entityManager->getRepository(User::class);
 //        $existingUser = $userRepo->findOneBy(['username' => $user->getUsername()]);
 
-        dd($existingUser);
-
         if (!$existingUser) {
             return $this->json(['message' => 'Invalid credentials'], 401);
         }
@@ -49,14 +45,12 @@ class SecurityController extends AbstractController
             return $this->json(['message' => 'Invalid credentials'], 401);
         }
 
-//        return $this->json([
-//            'id' => $user->getId(),
-//            'email' => $user->getEmail(),
-//            'first_name' => $user->getUsername(),
-//            'last_name' => $user->getPassword(),
-//            'roles' => $user->getRoles(),
-//            'name' => $user->getName(),
-//        ]);
+        return $this->json([
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'first_name' => $user->getUsername(),
+            'last_name' => $user->getPassword(),
+        ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]
