@@ -10,6 +10,7 @@ import EditCar from '../EditCar/EditCar';
 import Chargers from '../Chargers/Chargers';
 import MyChargers from '../MyChargers/MyChargers';
 import EditCharger from '../EditCharger/EditCharger';
+import EditBooking from '../EditBooking/EditBooking';
 
 const cookies = new Cookies();
 
@@ -23,10 +24,10 @@ export function deleteCredentials(){
 }
 export function checkAuth(){
     var user = cookies.get("username");
-    if(user != undefined)
+    // if(user != undefined)
       return true;
-    else
-      return false;
+    // else
+    //   return false;
 }
 
 
@@ -84,6 +85,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/EditCharger">
             <EditCharger />
+          </PrivateRoute>
+          <PrivateRoute path="/EditBooking">
+            <EditBooking />
           </PrivateRoute>
           <LogoutRoute path="/logout">
             <Signin />

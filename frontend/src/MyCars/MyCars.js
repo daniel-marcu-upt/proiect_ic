@@ -12,14 +12,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-function createData(plate, plug, details/*, booking*/) {
-  return { plate, plug, details/*, booking*/ };
+function createData(plate, plug, booking) {
+  return { plate, plug, booking };
 }
 
 const rows = [
-  createData("TM13DSA", "PLUG 1", "/EditCar/1", "/delete1"),
-  createData("TM34ASD", "PLUG 2", "/EditCar/2", "/delete2"),
-  createData("TM43SDA", "PLUG 1", "/EditCar/3", "/delete3"),
+  createData("TM13DSA", "PLUG 1", ""),
+  createData("TM34ASD", "PLUG 2", ""),
+  createData("TM43SDA", "PLUG 1", "1234"),
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -57,7 +57,8 @@ function MyCars() {
                 <StyledTableCell align="center">Plate</StyledTableCell>
                 <StyledTableCell align="center">Plug Type</StyledTableCell>
                 <StyledTableCell align="center">Details</StyledTableCell>
-                {/* <StyledTableCell align="center">Booking</StyledTableCell> */}
+                <StyledTableCell align="center">Chargers</StyledTableCell>
+                <StyledTableCell align="center">Booking</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -66,24 +67,42 @@ function MyCars() {
                   <StyledTableCell component="th" scope="row"  align="center">
                     {row.plate}
                   </StyledTableCell>
+
                   <StyledTableCell align="center">{row.plug}</StyledTableCell>
+
                   <StyledTableCell align="center">
                     <Button variant="contained">
-                      <a className='mycars-a' href={row.details}>Details</a>
+                      <a className='mycars-a' href={"/EditCar/"+row.plate}>Details</a>
                     </Button>
                   </StyledTableCell>
-                  {/* <StyledTableCell align="center">
-                    <Button color="success" variant="contained">
-                      <a className='mycars-a' href={row.booking}>Booking</a>
+
+                  <StyledTableCell align="center">
+                    <Button variant="contained">
+                      <a className='mycars-a' href={"/Chargers/"+row.plug}>View chargers</a>
                     </Button>
-                  </StyledTableCell> */}
+                  </StyledTableCell>
+                  
+                  {row.booking === "" ? (
+                    <StyledTableCell align="center">No booking available</StyledTableCell>
+                  ):(
+                    <StyledTableCell align="center">
+                      <Button variant="contained">
+                        <a className='mycars-a' href={"/EditBooking/"+row.booking}>View booking</a>
+                      </Button>
+                    </StyledTableCell>
+                  )}
+
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
         <br/><br/>
-        <Button color="success" variant="contained">Add car</Button>
+        <Button color="success" variant="contained">
+          <a className='mycars-a' href="/EditCar/">
+            Add car
+          </a>
+        </Button>
       </center>
     </div>
   );
