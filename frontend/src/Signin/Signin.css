@@ -39,3 +39,9 @@
 #signin-password-input, #signin-username-input{
   width: 40vmin;
 }
+.signin-error-p{
+  color:red;
+  font-size: calc(8px + 1.1vmin);
+  margin-bottom: 0;
+  margin-left: 10px;
+}

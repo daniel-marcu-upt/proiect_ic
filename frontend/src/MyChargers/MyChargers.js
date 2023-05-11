@@ -13,13 +13,13 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
 
-function createData(name, plug, location, price, details) {
-  return { name, plug, location, price, details };
+function createData(name, plug, location, price) {
+  return { name, plug, location, price };
 }
 
 const rows = [
-  createData("Incarcator kaufland", "PLUG 1", "45.76, 21.22", 1.2, "/Editcharger/1"),
-  createData("Incarcator poli", "PLUG 2", "45.7475, 21.226", 1.1, "/EditCharger/2"),
+  createData("Incarcator kaufland", "PLUG 1", "45.76, 21.22", 1.2),
+  createData("Incarcator poli", "PLUG 2", "45.7475, 21.226", 1.1),
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -72,7 +72,7 @@ function MyChargers() {
                   <StyledTableCell align="center">{row.price} RON/kW</StyledTableCell>
                   <StyledTableCell align="center">
                     <Button variant="contained">
-                      <a className='mychargers-a' href={row.details}>Details</a>
+                      <a className='mychargers-a' href={"/EditCharger/" + row.name}>Details</a>
                     </Button>
                   </StyledTableCell>
                 </StyledTableRow>
@@ -81,7 +81,9 @@ function MyChargers() {
           </Table>
         </TableContainer>
         <br/><br/>
-        <Button color="success" variant="contained">Add charger</Button>
+        <Button color="success" variant="contained">
+          <a className='mychargers-a' href="/EditCharger/">New charger</a>
+        </Button>
       </center>
     </div>
   );

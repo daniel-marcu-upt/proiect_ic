@@ -29,6 +29,10 @@ function EditCar() {
         <br/>
         <br />
         <Button color="success" variant="contained">Save</Button>
+        
+        <br/>
+        <br />
+        <Button color="error" variant="contained">Delete car</Button>
       </center>
     </div>
   );
