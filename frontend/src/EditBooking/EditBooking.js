@@ -11,7 +11,7 @@ import dayjs from 'dayjs'
 function EditBooking() {
   return (
     <div>
-      <Navbar extra username="Daniel"/>
+      <Navbar/>
       <center>
         <h1 className='editbooking-h1'>
           Edit Booking

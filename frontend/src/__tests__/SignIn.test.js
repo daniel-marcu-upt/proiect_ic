@@ -9,7 +9,7 @@ afterEach(cleanup);
 /**
  * @jest-environment jsdom
  */
-it('CheckboxWithLabel changes the text after click', () => {
+it('Login component', () => {
     const component = render(
       <Signin />
     );

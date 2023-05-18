@@ -45,7 +45,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function MyCars() {
   return (
     <div>
-      <Navbar username="Daniel"/>
+      <Navbar/>
       <center>
         <h1 className='mycars-h1'>
           My Cars

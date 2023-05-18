@@ -33,8 +33,9 @@ function Signin() {
           console.log(errorData.message);
           throw new Error(errorData.message);
         }
+        var role = "user";//TODO get from json
         console.log("try auth");
-        saveCredentials(username, password);
+        saveCredentials(username, password, role);
         console.log("autho done");
         history.push('/');
         history.go(0);

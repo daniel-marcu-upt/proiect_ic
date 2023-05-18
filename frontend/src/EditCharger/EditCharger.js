@@ -8,7 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 function EditCharger() {
   return (
     <div>
-      <Navbar extra username="Daniel"/>
+      <Navbar/>
       <center>
         <h1 className='editcharger-h1'>
           Edit Charger
