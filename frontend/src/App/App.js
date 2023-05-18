@@ -14,20 +14,34 @@ import EditBooking from '../EditBooking/EditBooking';
 
 const cookies = new Cookies();
 
-export function saveCredentials(user, pass){
+export function saveCredentials(user, pass, role){
     cookies.set('username', user, { path: '/' });
     cookies.set('password', pass, { path: '/' });
+    cookies.set('role', role, { path: '/' });
 }
 export function deleteCredentials(){
     cookies.remove('username');
     cookies.remove('password');
+    cookies.remove('role');
 }
 export function checkAuth(){
     var user = cookies.get("username");
-    // if(user != undefined)
+    if(user != undefined)
       return true;
-    // else
-    //   return false;
+    else
+      return false;
+}
+export function getCredentials(){
+  var user = cookies.get("username");
+  var pass = cookies.get("password");
+  var role = cookies.get("role");
+  return [user, pass, role];
+}
+export function checkOwner(){
+  var role = cookies.get("role");
+  if(role == "owner" && checkAuth())
+    return true;
+  return false;
 }
 
 
@@ -40,6 +54,20 @@ function PrivateRoute({ children, ...rest }) {
           children
         ) : (
           <Redirect to="/SignIn" />
+        );
+      }}
+    />
+  );
+}
+function OwnerRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return checkOwner() === true ? (
+          children
+        ) : (
+          <Redirect to="/" />
         );
       }}
     />
@@ -80,12 +108,12 @@ function App() {
           <PrivateRoute path="/Chargers">
             <Chargers />
           </PrivateRoute>
-          <PrivateRoute path="/MyChargers">
+          <OwnerRoute path="/MyChargers">
             <MyChargers />
-          </PrivateRoute>
-          <PrivateRoute path="/EditCharger">
+          </OwnerRoute>
+          <OwnerRoute path="/EditCharger">
             <EditCharger />
-          </PrivateRoute>
+          </OwnerRoute>
           <PrivateRoute path="/EditBooking">
             <EditBooking />
           </PrivateRoute>

@@ -12,6 +12,7 @@ function Signup() {
   let history = useHistory();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [userExist, setUserExist] = useState('');
@@ -24,14 +25,14 @@ function Signup() {
         const response = await fetch("http://127.0.0.1:8002/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({username, email, password}),
+          body: JSON.stringify({username, email, password, role}),
         });
         if (!response.ok) {
           const errorData = await response.json();
           setUserExist(errorData.message);
           throw new Error(errorData.message);
         }
-        saveCredentials(username, password);
+        saveCredentials(username, password, role);
         history.push('/');
         history.go(0);
         // Register successful, redirect to login page or do something else
@@ -86,7 +87,12 @@ function Signup() {
             {/*  autoComplete="new-password"*/}
             {/*/>*/}
             <br/><br/>
-            <FormControlLabel control={<Checkbox size="medium"/>} label="I own charging stations" />
+            <FormControlLabel control={
+              <Checkbox
+              size="medium"
+              onChange={(e) => setRole(e.target.checked?"owner":"user")}
+              />
+            } label="I own charging stations" />
 
             <p className='signup-error-p' >{userExist}</p>
             

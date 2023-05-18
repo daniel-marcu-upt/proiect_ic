@@ -13,14 +13,19 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { getCredentials } from '../App/App';
 
 
 
-function Navbar({extra, username}) {
+function Navbar() {
   
+  let [username, pass, role] = getCredentials();
+
+  username = username.toUpperCase();
+
   let pages = ['MyCars', 'Chargers'];
   let settings = ['Profile', 'Dashboard', 'Logout'];
-  if(extra){
+  if(role=="owner"){
     pages = pages.concat('Mychargers');
   }
 
@@ -138,7 +143,7 @@ function Navbar({extra, username}) {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt={username} src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={username} src="img.jpg"/>
                 </IconButton>
               </Tooltip>
               <Menu

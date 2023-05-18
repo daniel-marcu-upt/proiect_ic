@@ -11,7 +11,7 @@ function Chargers() {
   const position = [45.7475404089335, 21.22641090881591];
   return (
     <div>
-      <Navbar username="Daniel" />
+      <Navbar/>
       <center>
         <h1 className='chargers-h1'>
           Chargers
