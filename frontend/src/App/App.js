@@ -1,6 +1,5 @@
-import logo from '../logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 import Signup from '../Signup/Signup';
@@ -14,12 +13,14 @@ import EditBooking from '../EditBooking/EditBooking';
 
 const cookies = new Cookies();
 
-export function saveCredentials(user, pass, role){
+export function saveCredentials(id, user, pass, role){
+    cookies.set('id', id, { path: '/' });
     cookies.set('username', user, { path: '/' });
     cookies.set('password', pass, { path: '/' });
     cookies.set('role', role, { path: '/' });
 }
 export function deleteCredentials(){
+    cookies.remove('id');
     cookies.remove('username');
     cookies.remove('password');
     cookies.remove('role');
@@ -32,10 +33,11 @@ export function checkAuth(){
       return false;
 }
 export function getCredentials(){
+  var id = cookies.get("id");
   var user = cookies.get("username");
   var pass = cookies.get("password");
   var role = cookies.get("role");
-  return [user, pass, role];
+  return [id, user, pass, role];
 }
 export function checkOwner(){
   var role = cookies.get("role");
@@ -85,6 +87,18 @@ function LogoutRoute({ children, ...rest }) {
       }}
     />
   );
+}
+
+export function saveValidStations(validStations){
+    cookies.set('validStations', validStations, { path: '/' });
+}
+
+export function getValidStations(){
+    return cookies.get("validStations");
+}
+
+export function deleteValidStations(){
+    cookies.remove('validStations');
 }
 
 

@@ -21,6 +21,9 @@ class Plug
     #[ORM\Column]
     private ?bool $status = null;
 
+    #[ORM\Column]
+    private ?int $stationId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class Plug
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStationId(): ?int
+    {
+        return $this->stationId;
+    }
+
+    public function setStationId(int $stationId): self
+    {
+        $this->stationId = $stationId;
 
         return $this;
     }

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { getCredentials } from '../App/App';
+import {deleteValidStations, getCredentials} from '../App/App';
 
 
 
@@ -131,7 +131,14 @@ function Navbar() {
                 <a className='navbar-a' href={'/'+page}>
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={
+                      () => {
+                          if(page === 'Chargers'){
+                              deleteValidStations();
+                          }
+                          handleCloseNavMenu()
+                      }
+                    }
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
                   {page}

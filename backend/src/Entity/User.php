@@ -29,6 +29,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column]
+    private ?bool $isAdmin = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,5 +94,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getIsAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
     }
 }

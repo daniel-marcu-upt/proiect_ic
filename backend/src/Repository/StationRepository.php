@@ -63,4 +63,14 @@ class StationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByCarPlugType($plugType): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.plugType = :val')
+            ->setParameter('val', $plugType)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
