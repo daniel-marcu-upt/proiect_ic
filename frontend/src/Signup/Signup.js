@@ -11,6 +11,7 @@ import {checkAuth, saveCredentials, deleteCredentials} from "../App/App";
 function Signup() {
   let history = useHistory();
   const [username, setUsername] = useState("");
+  const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +33,7 @@ function Signup() {
           setUserExist(errorData.message);
           throw new Error(errorData.message);
         }
-        saveCredentials(username, password, role, id);
+        saveCredentials(id, username, password, role);
         history.push('/');
         history.go(0);
         // Register successful, redirect to login page or do something else
