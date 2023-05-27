@@ -22,7 +22,7 @@ function Signup() {
     e.preventDefault();
     if(username !== '' && password !== '' && email !== '') {
       try {
-        const response = await fetch("http://127.0.0.1:8002/register", {
+        const response = await fetch("https://127.0.0.1:8002/api/register", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({username, email, password, role}),
@@ -32,7 +32,7 @@ function Signup() {
           setUserExist(errorData.message);
           throw new Error(errorData.message);
         }
-        saveCredentials(username, password, role);
+        saveCredentials(username, password, role, id);
         history.push('/');
         history.go(0);
         // Register successful, redirect to login page or do something else
@@ -90,9 +90,9 @@ function Signup() {
             <FormControlLabel control={
               <Checkbox
               size="medium"
-              onChange={(e) => setRole(e.target.checked?"owner":"user")}
+              onChange={(e) => setRole(e.target.checked? true : false)}
               />
-            } label="I own charging stations" />
+            } label="I want to be a station contributor" />
 
             <p className='signup-error-p' >{userExist}</p>
             

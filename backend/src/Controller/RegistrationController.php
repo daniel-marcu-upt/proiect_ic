@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/api/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): JsonResponse
     {
 
@@ -24,6 +24,7 @@ class RegistrationController extends AbstractController
         $user->setEmail($data['email']);
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
+        $user->setIsAdmin($data['role']);
 
         $userRepo = $entityManager->getRepository(User::class);
         $existingUser = $userRepo->findOneBy(['username' => $user->getUsername()]);
@@ -45,8 +46,9 @@ class RegistrationController extends AbstractController
         return $this->json([
             'id' => $user->getId(),
             'email' => $user->getEmail(),
-            'first_name' => $user->getUsername(),
-            'last_name' => $user->getPassword(),
+            'username' => $user->getUsername(),
+            'password' => $user->getPassword(),
+            'role' => $user->getIsAdmin(),
         ]);
     }
 }

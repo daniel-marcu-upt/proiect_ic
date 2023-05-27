@@ -63,4 +63,15 @@ class PlugRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByCarPlugTypeAndStationId($plugType, $stationId): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.type = :plugType')
+            ->andWhere('p.stationId = :stationId')
+            ->setParameter('plugType', $plugType)
+            ->setParameter('stationId', $stationId)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -21,6 +21,9 @@ class Car
     #[ORM\Column(length: 255)]
     private ?string $plugType = null;
 
+    #[ORM\Column]
+    private ?int $userId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class Car
     public function setPlugType(string $plugType): self
     {
         $this->plugType = $plugType;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }

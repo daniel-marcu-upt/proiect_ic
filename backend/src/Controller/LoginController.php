@@ -13,13 +13,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'login')]
+    #[Route('/api/login', name: 'login')]
     public function login(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
         $user = new User();
-        $user->setEmail('default');
         $user->setUsername($data['username']);
         $user->setPassword($data['password']);
 
@@ -35,10 +34,11 @@ class LoginController extends AbstractController
         }
 
         return $this->json([
-            'id' => $user->getId(),
-            'email' => $user->getEmail(),
-            'first_name' => $user->getUsername(),
-            'last_name' => $user->getPassword(),
+            'id' => $existingUser->getId(),
+            'email' => $existingUser->getEmail(),
+            'username' => $existingUser->getUsername(),
+            'password' => $existingUser->getPassword(),
+            'isAdmin' => $existingUser->getIsAdmin(),
         ]);
     }
 

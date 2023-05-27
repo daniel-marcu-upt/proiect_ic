@@ -16,10 +16,10 @@ class Station
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $latitude = null;
+    private ?float $latitude = null;
 
     #[ORM\Column]
-    private ?int $longitude = null;
+    private ?float $longitude = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -32,24 +32,24 @@ class Station
         return $this->id;
     }
 
-    public function getLatitude(): ?int
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    public function setLatitude(int $latitude): self
+    public function setLatitude(float $latitude): self
     {
         $this->latitude = $latitude;
 
         return $this;
     }
 
-    public function getLongitude(): ?int
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
-    public function setLongitude(int $longitude): self
+    public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
 

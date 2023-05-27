@@ -21,21 +21,20 @@ function Signin() {
     if(username !== '' && password !== '') {
       try {
         console.log(JSON.stringify({username, password}));
-        const response = await fetch("http://127.0.0.1:8002/login", {
+        const response = await fetch("https://127.0.0.1:8002/api/login", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({username, password}),
         });
-        console.log(response);
+        const data = await response.json();
         if (!response.ok) {
-          const errorData = await response.json();
-          setRequestMess(errorData.message);
-          console.log(errorData.message);
-          throw new Error(errorData.message);
+          setRequestMess(data.message);
+          throw new Error(data.message);
         }
-        var role = "user";//TODO get from json
+
         console.log("try auth");
-        saveCredentials(username, password, role);
+        const role = data.isAdmin ? "admin" : "user";
+        saveCredentials(data.id, data.username, data.password, role);
         console.log("autho done");
         history.push('/');
         history.go(0);
