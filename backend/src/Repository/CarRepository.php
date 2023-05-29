@@ -64,13 +64,22 @@ class CarRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function findByUserId($user_id): array
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.userId = :user_id')
-            ->setParameter('user_id', $user_id)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
+public function findByUserId($user_id): array
+{
+    return $this->createQueryBuilder('p')
+        ->andWhere('p.userId = :user_id')
+        ->setParameter('user_id', $user_id)
+        ->getQuery()
+        ->getResult()
+        ;
+}
+public function findById($id): array
+{
+    return $this->createQueryBuilder('p')
+        ->andWhere('p.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getResult()
+        ;
+}
 }

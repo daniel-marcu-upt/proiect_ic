@@ -26,9 +26,64 @@ class CarController extends AbstractController
                     'id' => $car->getId(),
                     'plate' => $car->getPlate(),
                     'plug' => $car->getPlugType(),
-                    'booking' => '',
+                    'booking' => ''
                 ];
             }, $cars)
         );
+    }
+    #[Route('/api/post-car', name: 'create_car')]
+    public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        // get the user data from the request body
+        $data = json_decode($request->getContent(), true);
+
+        // create a new user entity
+        $car = new Car();
+        $car->setPlate($data['plate']);
+        $car->setPlugType($data['plugType']);
+        $car->setUserId($data['user_id']);
+        // persist the user entity in the database
+        $entityManager->persist($car);
+        $entityManager->flush();
+        // return a JSON response with the new user data
+        return $this->json([
+            'id' => $car->getId(),
+            'plate' => $car->getPlate(),
+            'plugType' => $car->getPlugType(),
+        ]);
+    }
+    #[Route('/api/delete-car', name: 'delete_car')]
+    public function delete(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        // get the user data from the request body
+        $data = json_decode($request->getContent(), true);
+
+        $car = $entityManager->getRepository(Car::class)->findById($data['carId']);
+        $entityManager->getRepository(Car::class)->remove($car[0]);
+        
+        $entityManager->flush();
+
+        return $this->json([
+            'len' => sizeof($car)
+        ]);
+    }
+    #[Route('/api/edit-car', name: 'edit_car')]
+    public function edit(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        // get the user data from the request body
+        $data = json_decode($request->getContent(), true);
+
+        $car = $entityManager->getRepository(Car::class)->findById($data['carId'])[0];
+        $car->setPlate($data['plate']);
+        $car->setPlugType($data['plugType']);
+        
+        $entityManager->persist($car);
+        $entityManager->flush();
+
+        return $this->json([
+            'id' => $car->getId(),
+            'plate' => $car->getPlate(),
+            'plugType' => $car->getPlugType(),
+        ]);
     }
 }

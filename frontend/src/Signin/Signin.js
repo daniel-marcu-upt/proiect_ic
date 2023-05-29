@@ -21,7 +21,7 @@ function Signin() {
     if(username !== '' && password !== '') {
       try {
         console.log(JSON.stringify({username, password}));
-        const response = await fetch("https://127.0.0.1:8002/api/login", {
+        const response = await fetch("http://127.0.0.1:8002/api/login", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({username, password}),
