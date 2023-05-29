@@ -24,6 +24,9 @@ class Car
     #[ORM\Column]
     private ?int $userId = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $bookingId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Car
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getBookingId(): ?int
+    {
+        return $this->bookingId;
+    }
+
+    public function setBookingId(?int $bookingId): self
+    {
+        $this->bookingId = $bookingId;
 
         return $this;
     }

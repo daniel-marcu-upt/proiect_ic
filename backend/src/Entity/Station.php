@@ -27,6 +27,15 @@ class Station
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $plugType = null;
+
+    #[ORM\Column]
+    private ?float $price = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $userId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +85,42 @@ class Station
     public function setLocation(?string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getPlugType(): ?string
+    {
+        return $this->plugType;
+    }
+
+    public function setPlugType(string $plugType): self
+    {
+        $this->plugType = $plugType;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }

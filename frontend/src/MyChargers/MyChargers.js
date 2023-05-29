@@ -11,6 +11,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import {useEffect, useState} from "react";
+import {deleteSelectedStationId, getCredentials, saveSelectedStationId} from "../App/App";
 
 
 function createData(name, plug, location, price) {
@@ -43,6 +45,36 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function MyChargers() {
+  const [userId, user, pass, role] = getCredentials();
+  const [stations, setStations] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect( () => {
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`https://127.0.0.1:8002/api/get-user-stations/${userId}`, {
+          method: "GET",
+          headers: {"Content-Type": "application/json"},
+        });
+        console.log("useEffect2");
+        const data = await response.json();
+        if (!response.ok) {
+          console.log(data.message);
+          throw new Error(data.message);
+        }
+        console.log("stations", data);
+        setStations(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    }
+
+    fetchData();
+  }, []); // <- add the count variable here
+
+
+
   return (
     <div>
       <Navbar/>
@@ -62,17 +94,21 @@ function MyChargers() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.name}>
+              {stations.map((station) => (
+                <StyledTableRow key={station.name}>
                   <StyledTableCell component="th" scope="row"  align="center">
-                    {row.name}
+                    {station.name}
                   </StyledTableCell>
-                  <StyledTableCell align="center">{row.plug}</StyledTableCell>
-                  <StyledTableCell align="center">{row.location}</StyledTableCell>
-                  <StyledTableCell align="center">{row.price} RON/kW</StyledTableCell>
+                  <StyledTableCell align="center">{station.plug}</StyledTableCell>
+                  <StyledTableCell align="center">{station.location}</StyledTableCell>
+                  <StyledTableCell align="center">{station.price} RON/kW</StyledTableCell>
                   <StyledTableCell align="center">
-                    <Button variant="contained">
-                      <a className='mychargers-a' href={"/EditCharger/" + row.name}>Details</a>
+                    <Button variant="contained"
+                    onClick={() => {
+                      saveSelectedStationId(station.id)
+                    }}
+                    >
+                      <a className='mychargers-a' href={"/EditCharger/" + station.name}>Details</a>
                     </Button>
                   </StyledTableCell>
                 </StyledTableRow>
@@ -81,7 +117,11 @@ function MyChargers() {
           </Table>
         </TableContainer>
         <br/><br/>
-        <Button color="success" variant="contained">
+        <Button color="success" variant="contained"
+                onClick={() => {
+                  deleteSelectedStationId()
+                }}
+        >
           <a className='mychargers-a' href="/EditCharger/">New charger</a>
         </Button>
       </center>

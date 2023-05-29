@@ -41,7 +41,7 @@ export function getCredentials(){
 }
 export function checkOwner(){
   var role = cookies.get("role");
-  if(role && checkAuth())
+  if(role == "admin" && checkAuth())
     return true;
   return false;
 }
@@ -89,16 +89,20 @@ function LogoutRoute({ children, ...rest }) {
   );
 }
 
-export function saveValidStations(validStations){
-  cookies.set('validStations', validStations, { path: '/' });
+export function saveValidStations(carId, validStations){
+    cookies.set('carId', carId, { path: '/' });
+    cookies.set('validStations', validStations, { path: '/' });
 }
 
 export function getValidStations(){
-  return cookies.get("validStations");
+    var catId = cookies.get("carId");
+    var spStations = cookies.get("validStations");
+    return [catId, spStations];
 }
 
 export function deleteValidStations(){
-  cookies.remove('validStations');
+    cookies.remove('carId');
+    cookies.remove('validStations');
 }
 export function saveCarData(car){
     cookies.set('car', car, { path: '/' });
@@ -110,6 +114,30 @@ export function getCarData(){
 
 export function deleteCarData(){
     cookies.remove('car');
+}
+
+export function saveBookingId(bookingId){
+    cookies.set('bookingId', bookingId, { path: '/' });
+}
+
+export function getBookingId(){
+    return cookies.get("bookingId");
+}
+
+export function deleteBookingId(){
+    cookies.remove('bookingId');
+}
+
+export function saveSelectedStationId(bookingId){
+    cookies.set('stationId', bookingId, { path: '/' });
+}
+
+export function getSelectedStationId(){
+    return cookies.get("stationId");
+}
+
+export function deleteSelectedStationId(){
+    cookies.remove('stationId');
 }
 
 
