@@ -41,7 +41,7 @@ export function getCredentials(){
 }
 export function checkOwner(){
   var role = cookies.get("role");
-  if(role == "owner" && checkAuth())
+  if(role && checkAuth())
     return true;
   return false;
 }
