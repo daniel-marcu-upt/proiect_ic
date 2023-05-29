@@ -22,7 +22,7 @@ function EditCar() {
     let [user_id, username, pass, role] = getCredentials();
     console.log(JSON.stringify({username, plate, plugType}));
     if(plate != ""){
-      const response = await fetch("http://127.0.0.1:8002/api/post-car", {
+      const response = await fetch("https://127.0.0.1:8002/api/post-car", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({user_id, plate, plugType}),
@@ -44,7 +44,7 @@ function EditCar() {
     let [user_id, username, pass, role] = getCredentials();
     console.log(JSON.stringify({user_id, carId, plate, plugType}));
     if(plate != ""){
-      const response = await fetch("http://127.0.0.1:8002/api/edit-car", {
+      const response = await fetch("https://127.0.0.1:8002/api/edit-car", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({user_id, carId, plate, plugType}),
@@ -68,7 +68,7 @@ function EditCar() {
     e.preventDefault();
     let [user_id, username, pass, role] = getCredentials();
     console.log(JSON.stringify({user_id, carId}));
-    const response = await fetch("http://127.0.0.1:8002/api/delete-car", {
+    const response = await fetch("https://127.0.0.1:8002/api/delete-car", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({user_id, carId}),

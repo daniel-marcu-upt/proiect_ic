@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
         $existingUser = $userRepo->findOneBy(['username' => $user->getUsername()]);
 
         if ($existingUser) {
-            return $this->json(['message' => 'User Already exist!'], 401);
+            return $this->json(['message' => 'User Already exists!'], 401);
         }
 
 

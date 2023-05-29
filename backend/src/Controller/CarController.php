@@ -26,7 +26,7 @@ class CarController extends AbstractController
                     'id' => $car->getId(),
                     'plate' => $car->getPlate(),
                     'plug' => $car->getPlugType(),
-                    'booking' => ''
+                    'bookingId' => $car->getBookingId(),
                 ];
             }, $cars)
         );
@@ -60,7 +60,7 @@ class CarController extends AbstractController
 
         $car = $entityManager->getRepository(Car::class)->findById($data['carId']);
         $entityManager->getRepository(Car::class)->remove($car[0]);
-        
+
         $entityManager->flush();
 
         return $this->json([
@@ -76,7 +76,7 @@ class CarController extends AbstractController
         $car = $entityManager->getRepository(Car::class)->findById($data['carId'])[0];
         $car->setPlate($data['plate']);
         $car->setPlugType($data['plugType']);
-        
+
         $entityManager->persist($car);
         $entityManager->flush();
 
@@ -85,5 +85,39 @@ class CarController extends AbstractController
             'plate' => $car->getPlate(),
             'plugType' => $car->getPlugType(),
         ]);
+    }
+
+    #[Route('/api/add-booking-to-car/{id}', name: 'add_booking_to_car')]
+    public function addBookingToCar($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $car = $entityManager->getRepository(Car::class)->find($id);
+        $car->setBookingId($data['bookingId']);
+
+        $entityManager->persist($car);
+        $entityManager->flush();
+
+        // return a JSON response with the new user data
+        return $this->json(
+            $car
+        );
+    }
+
+    #[Route('/api/delete_car_booking/{id}', name: 'delete_car_booking')]
+    public function deleteCarBooking($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $car = $entityManager->getRepository(Car::class)->find($id);
+        $car->setBookingId(NULL);
+
+        $entityManager->persist($car);
+        $entityManager->flush();
+
+        // return a JSON response with the new user data
+        return $this->json(
+            $car
+        );
     }
 }

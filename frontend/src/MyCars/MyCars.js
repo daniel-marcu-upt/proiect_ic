@@ -11,7 +11,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import {deleteCarData, getCredentials, saveCarData, saveValidStations} from "../App/App";
+import {
+  deleteCarData,
+  deleteValidStations,
+  getCredentials,
+  getValidStations, saveBookingId, saveCarData,
+  saveCredentials,
+  saveValidStations
+} from "../App/App";
 import {useHistory} from "react-router-dom";
 import {useState, useEffect} from "react";
 
@@ -20,6 +27,9 @@ function createData(plate, plug, booking) {
 }
 
 const cars = [
+  createData("TM13DSA", "PLUG 1", ""),
+  createData("TM34ASD", "PLUG 2", ""),
+  createData("TM43SDA", "PLUG 1", "1234"),
 ];
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -52,7 +62,7 @@ function MyCars() {
     const [userId, user, pass, role] = getCredentials();
     const fetchData = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8002/api/get-cars/${userId}`, {
+      const response = await fetch(`https://127.0.0.1:8002/api/get-cars/${userId}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
       });
@@ -62,8 +72,6 @@ function MyCars() {
         console.log(data.message);
         throw new Error(data.message);
       }
-      console.log(data);
-      //rows.append(createData());
       setCars(data);
     } catch (error) {
       setError(error.message);
@@ -75,7 +83,7 @@ function MyCars() {
 
   const getSpecificUserPlugs = async (carId) =>  {
     try {
-      const response = await fetch(`http://127.0.0.1:8002/api/get-specific-car-stations/${carId}`, {
+      const response = await fetch(`https://127.0.0.1:8002/api/get-specific-car-stations/${carId}`, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
       });
@@ -84,7 +92,7 @@ function MyCars() {
         console.log(data.message);
         throw new Error(data.message);
       }
-      saveValidStations(data);
+      saveValidStations(carId, data);
       history.push(`/Chargers/${carId}`);
       history.go(0);
 
@@ -142,12 +150,17 @@ function MyCars() {
                     </Button>
                   </StyledTableCell>
                   
-                  {car.booking === "" ? (
+                  {car.bookingId === null  ? (
                     <StyledTableCell align="center">No booking available</StyledTableCell>
                   ):(
                     <StyledTableCell align="center">
-                      <Button variant="contained">
-                        <a className='mycars-a' href={"/EditBooking/"+car.booking}>View booking</a>
+                      <Button variant="contained"
+                      onClick={() =>{
+                          saveBookingId(car.bookingId)
+                          getSpecificUserPlugs(car.id);
+                      }}
+                      >
+                        <a className='mycars-a' href={"/EditBooking/"+car.bookingId}>View booking</a>
                       </Button>
                     </StyledTableCell>
                   )}

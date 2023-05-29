@@ -26,8 +26,9 @@ console.log(role);
   username = username.toUpperCase();
 
   let pages = ['MyCars', 'Chargers'];
-  let settings = ['Dashboard', 'Logout'];
-  if(role){
+  let settings = ['Profile', 'Dashboard', 'Logout'];
+  console.log("role", role)
+  if(role=="admin"){
     pages = pages.concat('Mychargers');
   }
 

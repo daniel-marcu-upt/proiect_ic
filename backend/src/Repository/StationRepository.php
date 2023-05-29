@@ -73,4 +73,14 @@ class StationRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findByUserId($userId): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.userId = :val')
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

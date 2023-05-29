@@ -22,9 +22,27 @@ class Booking
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startTime = null;
 
+    #[ORM\Column]
+    private ?int $carId = null;
+
+    #[ORM\Column]
+    private ?int $stationId = null;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCarId(): ?int
+    {
+        return $this->carId;
+    }
+
+    public function setCarId(?int $carId): self
+    {
+        $this->carId = $carId;
+
+        return $this;
     }
 
     public function getDuration(): ?\DateInterval
@@ -47,6 +65,18 @@ class Booking
     public function setStartTime(\DateTimeInterface $startTime): self
     {
         $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    public function getStationId(): ?int
+    {
+        return $this->stationId;
+    }
+
+    public function setStationId(int $stationId): self
+    {
+        $this->stationId = $stationId;
 
         return $this;
     }
