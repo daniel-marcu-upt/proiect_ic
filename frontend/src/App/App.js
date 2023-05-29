@@ -145,6 +145,9 @@ function App() {
           <LogoutRoute path="/logout">
             <Signin />
           </LogoutRoute>
+          <PrivateRoute path="/Dashboard">
+            <MyCars />
+          </PrivateRoute>
           <PrivateRoute path="/">
             <MyCars />
           </PrivateRoute>

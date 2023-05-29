@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import {deleteValidStations, getCredentials} from '../App/App';
 
 
@@ -26,7 +26,7 @@ console.log(role);
   username = username.toUpperCase();
 
   let pages = ['MyCars', 'Chargers'];
-  let settings = ['Profile', 'Dashboard', 'Logout'];
+  let settings = ['Dashboard', 'Logout'];
   if(role){
     pages = pages.concat('Mychargers');
   }
@@ -54,7 +54,7 @@ console.log(role);
       <AppBar position="static" color='success'>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <ElectricCarIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
               variant="h6"
               noWrap
@@ -70,7 +70,7 @@ console.log(role);
                 textDecoration: 'none',
               }}
             >
-              HOME
+              ChargeIT
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -109,7 +109,7 @@ console.log(role);
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <ElectricCarIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
