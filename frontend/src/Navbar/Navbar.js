@@ -19,13 +19,15 @@ import {deleteValidStations, getCredentials} from '../App/App';
 
 function Navbar() {
   
-  let [username, pass, role] = getCredentials();
+  let [id, username, pass, role] = getCredentials();
+
+console.log(role);
 
   username = username.toUpperCase();
 
   let pages = ['MyCars', 'Chargers'];
   let settings = ['Profile', 'Dashboard', 'Logout'];
-  if(role=="owner"){
+  if(role){
     pages = pages.concat('Mychargers');
   }
 

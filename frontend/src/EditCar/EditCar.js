@@ -5,27 +5,33 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {useHistory} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getCredentials} from "../App/App";
+import {deleteCarData, getCarData, getCredentials} from "../App/App";
 
 function EditCar() {
+  
+
   let history = useHistory();
   //const [username, setUsername] = useState("");
-  const [plate, setPlate] = useState("");
-  const [plugType, setPlugType] = useState("");
+  let [plate, setPlate] = useState("");
+  let [plugType, setPlugType] = useState("");
+  let [carId, setCarId] = useState("");
+  let [init, setInit] = useState(0);
 
   const handleRequest = async (e) => {
     e.preventDefault();
-    const [username, password] = getCredentials();
+    let [user_id, username, pass, role] = getCredentials();
     console.log(JSON.stringify({username, plate, plugType}));
-    const response = await fetch("http://127.0.0.1:8002/post-car", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({username, plate, plugType}),
-    });
-    console.log(response);
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.log(errorData.message);
+    if(plate != ""){
+      const response = await fetch("http://127.0.0.1:8002/api/post-car", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({user_id, plate, plugType}),
+      });
+      console.log(response);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData.message);
+      }
     }
     console.log("request done");
     history.push('/');
@@ -33,6 +39,70 @@ function EditCar() {
     // request successful, redirect to home page or do something else
       
   };
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    let [user_id, username, pass, role] = getCredentials();
+    console.log(JSON.stringify({user_id, carId, plate, plugType}));
+    if(plate != ""){
+      const response = await fetch("http://127.0.0.1:8002/api/edit-car", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({user_id, carId, plate, plugType}),
+      });
+      console.log(response);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData.message);
+      }
+    }
+    console.log("request done");
+    deleteCarData();
+    history.push('/');
+    history.go(0);
+    // request successful, redirect to home page or do something else
+      
+  };
+
+  const handleDelete = async(e) =>{
+
+    e.preventDefault();
+    let [user_id, username, pass, role] = getCredentials();
+    console.log(JSON.stringify({user_id, carId}));
+    const response = await fetch("http://127.0.0.1:8002/api/delete-car", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({user_id, carId}),
+    });
+    console.log(response);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData.message);
+    }
+    const j = await response.json();
+    console.log(j);
+    console.log("request done");
+    
+    deleteCarData();
+    history.push('/');
+    history.go(0);
+    // request successful, redirect to home page or do something else
+  };
+
+  let [fct, setFct] = useState(0);
+  const func = [handleRequest, handleEdit];
+
+  if(init == 0){
+    setInit(1);
+    let car = getCarData();
+    console.log(car);
+
+    if(car != undefined){
+      setFct(1);
+      setPlate(car.plate);
+      setPlugType(car.plug);
+      setCarId(car.id);
+  }
+}
 
 
   return (
@@ -66,11 +136,11 @@ function EditCar() {
         />
         <br/>
         <br />
-        <Button color="success" variant="contained" onClick={handleRequest}>Save</Button>
+        <Button color="success" variant="contained" onClick={func[fct]}>Save</Button>
         
         <br/>
         <br />
-        <Button color="error" variant="contained">Delete car</Button>
+        <Button color="error" variant="contained" onClick={handleDelete}>Delete car</Button>
       </center>
     </div>
   );

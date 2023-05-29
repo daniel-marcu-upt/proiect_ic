@@ -90,15 +90,26 @@ function LogoutRoute({ children, ...rest }) {
 }
 
 export function saveValidStations(validStations){
-    cookies.set('validStations', validStations, { path: '/' });
+  cookies.set('validStations', validStations, { path: '/' });
 }
 
 export function getValidStations(){
-    return cookies.get("validStations");
+  return cookies.get("validStations");
 }
 
 export function deleteValidStations(){
-    cookies.remove('validStations');
+  cookies.remove('validStations');
+}
+export function saveCarData(car){
+    cookies.set('car', car, { path: '/' });
+}
+
+export function getCarData(){
+    return cookies.get("car");
+}
+
+export function deleteCarData(){
+    cookies.remove('car');
 }
 
 
