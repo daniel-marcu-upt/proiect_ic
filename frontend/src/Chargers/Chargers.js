@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { MenuItem } from '@mui/material';
+import Typography from "@mui/joy/Typography";
 
 
 function Chargers(props) {
@@ -227,14 +228,14 @@ function Chargers(props) {
                       {/*</Grid>*/}
                       <br/>
                       <Grid item>
-                        <Button type="submit" variant="contained" color="success"
+                        {carIdd ?  <Button type="submit" variant="contained" color="success"
                         marginLeft="10px"
                                 onClick={() => {
                                   handleSubmitBooking(station.id)
                                 }}
                         >
                           Book
-                        </Button>
+                        </Button> : <Typography level="body3" sx={{ mt: 2.5 }}>Select a car in order to make a booking</Typography>}
                       </Grid>
                     </Grid>
                   <br/>

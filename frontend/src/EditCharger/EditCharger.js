@@ -20,6 +20,7 @@ function EditCharger() {
   const [longitude2, setLongitude] = useState('');
   const [location, setLocation] = useState('');
   const [price2, setPrice2] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
 
   useEffect( () => {
 
@@ -40,6 +41,7 @@ function EditCharger() {
         setLatitude(data.latitude);
         setLocation(data.location);
         setPrice2(data.price);
+        setImgUrl(data.imgUrl);
 
       } catch (error) {
         setError(error.message);
@@ -52,11 +54,12 @@ function EditCharger() {
   }, []); // <- add the count variable here
 
   const handleSaveCharger = async () => {
-    const price = parseInt(price2, 10);
+    const price = parseFloat(price2, 10);
     const userId = parseInt(userId2, 10);
     const latitude = parseFloat(latitude2, 10);
     const longitude = parseFloat(longitude2, 10);
     console.log("price", selectedStationId);
+    const location = "Timisoara";
 
 
     if(selectedStationId === undefined) {
@@ -64,7 +67,7 @@ function EditCharger() {
         const response = await fetch(`https://127.0.0.1:8002/api/stations`, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({name, plugType, latitude, longitude, price, userId}),
+          body: JSON.stringify({name, plugType, latitude, longitude, price, userId, imgUrl, location}),
         });
         const data = await response.json();
         if (!response.ok) {
@@ -80,7 +83,7 @@ function EditCharger() {
         const response = await fetch(`https://127.0.0.1:8002/api/stations/${selectedStationId}`, {
           method: "PUT",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({name, plugType, latitude, longitude, price, userId}),
+          body: JSON.stringify({name, plugType, latitude, longitude, price, userId, imgUrl}),
         });
         const data = await response.json();
         if (!response.ok) {
@@ -180,6 +183,17 @@ function EditCharger() {
             endAdornment: <InputAdornment position="end">lei/kW</InputAdornment>,
           }}
           variant="standard"
+        />
+        <br/>
+        <TextField
+            label="Image URL"
+            value={imgUrl}
+            onChange={(event) => {
+              setImgUrl(event.target.value)
+            }}
+            id="lon"
+            sx={{ m: 1, width: '50ch' }}
+            variant="standard"
         />
         <br/>
         <br/>

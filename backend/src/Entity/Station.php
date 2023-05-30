@@ -36,6 +36,9 @@ class Station
     #[ORM\Column(nullable: true)]
     private ?int $userId = null;
 
+    #[ORM\Column(length: 2000)]
+    private ?string $imgUrl = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +124,18 @@ class Station
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
+
+        return $this;
+    }
+
+    public function getImgUrl(): ?string
+    {
+        return $this->imgUrl;
+    }
+
+    public function setImgUrl(string $imgUrl): self
+    {
+        $this->imgUrl = $imgUrl;
 
         return $this;
     }
