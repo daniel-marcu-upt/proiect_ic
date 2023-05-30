@@ -27,6 +27,12 @@ class Car
     #[ORM\Column(nullable: true)]
     private ?int $bookingId = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(length: 3000)]
+    private ?string $imgUrl = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +82,30 @@ class Car
     public function setBookingId(?int $bookingId): self
     {
         $this->bookingId = $bookingId;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getImgUrl(): ?string
+    {
+        return $this->imgUrl;
+    }
+
+    public function setImgUrl(string $imgUrl): self
+    {
+        $this->imgUrl = $imgUrl;
 
         return $this;
     }

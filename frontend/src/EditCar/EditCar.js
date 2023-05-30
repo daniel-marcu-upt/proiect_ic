@@ -15,6 +15,8 @@ function EditCar() {
   let [plate, setPlate] = useState("");
   let [plugType, setPlugType] = useState("");
   let [carId, setCarId] = useState("");
+  let [carName, setCarName] = useState("");
+  let [carImgUrl, setCarImgUrl] = useState("");
   let [init, setInit] = useState(0);
 
   const handleRequest = async (e) => {
@@ -25,7 +27,7 @@ function EditCar() {
       const response = await fetch("https://127.0.0.1:8002/api/post-car", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({user_id, plate, plugType}),
+        body: JSON.stringify({user_id, plate, plugType, carName, carImgUrl}),
       });
       console.log(response);
       if (!response.ok) {
@@ -47,7 +49,7 @@ function EditCar() {
       const response = await fetch("https://127.0.0.1:8002/api/edit-car", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({user_id, carId, plate, plugType}),
+        body: JSON.stringify({user_id, carId, plate, plugType, carName, carImgUrl}),
       });
       console.log(response);
       if (!response.ok) {
@@ -101,6 +103,8 @@ function EditCar() {
       setPlate(car.plate);
       setPlugType(car.plug);
       setCarId(car.id);
+      setCarName(car.name);
+      setCarImgUrl(car.imgUrl);
   }
 }
 
@@ -112,7 +116,17 @@ function EditCar() {
         <h1 className='editcar-h1'>
           Edit Car
         </h1>
-        
+        <br/>
+        <TextField
+            id="name"
+            label="Name"
+            type="text"
+            sx={{ m: 1, width: '50ch' }}
+            variant="standard"
+            required
+            value={carName}
+            onChange={(e)=> setCarName(e.target.value)}
+        />
         <TextField
           id="plate"
           label="Plate"
@@ -133,6 +147,16 @@ function EditCar() {
           required
           value={plugType}
           onChange={(e)=> setPlugType(e.target.value)}
+        />
+        <TextField
+            id="imgUrl"
+            label="Image URL"
+            type="text"
+            sx={{ m: 1, width: '50ch' }}
+            variant="standard"
+            required
+            value={carImgUrl}
+            onChange={(e)=> setCarImgUrl(e.target.value)}
         />
         <br/>
         <br />

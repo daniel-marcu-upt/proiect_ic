@@ -27,6 +27,9 @@ class CarController extends AbstractController
                     'plate' => $car->getPlate(),
                     'plug' => $car->getPlugType(),
                     'bookingId' => $car->getBookingId(),
+                    'userId' => $car->getUserId(),
+                    'name' => $car->getName(),
+                    'imgUrl' => $car->getImgUrl(),
                 ];
             }, $cars)
         );
@@ -42,6 +45,8 @@ class CarController extends AbstractController
         $car->setPlate($data['plate']);
         $car->setPlugType($data['plugType']);
         $car->setUserId($data['user_id']);
+        $car->setName($data['carName']);
+        $car->setImgUrl($data['carImgUrl']);
         // persist the user entity in the database
         $entityManager->persist($car);
         $entityManager->flush();
@@ -76,6 +81,8 @@ class CarController extends AbstractController
         $car = $entityManager->getRepository(Car::class)->findById($data['carId'])[0];
         $car->setPlate($data['plate']);
         $car->setPlugType($data['plugType']);
+        $car->setName($data['carName']);
+        $car->setImgUrl($data['carImgUrl']);
 
         $entityManager->persist($car);
         $entityManager->flush();

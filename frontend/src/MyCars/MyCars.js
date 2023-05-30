@@ -1,7 +1,7 @@
 import './MyCars.css';
 import * as React from 'react';
 import Navbar from '../Navbar/Navbar';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import TextField from '@mui/material/TextField';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,6 +21,11 @@ import {
 } from "../App/App";
 import {useHistory} from "react-router-dom";
 import {useState, useEffect} from "react";
+import Card from '@mui/joy/Card';
+import Typography from '@mui/joy/Typography';
+import IconButton from "@mui/joy/IconButton";
+import {AspectRatio} from "@mui/joy";
+import Box from "@mui/joy/Box";
 
 function createData(plate, plug, booking) {
   return { plate, plug, booking };
@@ -111,71 +116,165 @@ function MyCars() {
     <div>
       <Navbar/>
       <center>
-        <h1 className='mycars-h1'>
-          My Cars
-        </h1>
-        <TableContainer className='mycars-container' component={Paper}>
-          <Table className='mycars-table' sx={{ minWidth: 550 }} aria-label="custom table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="center">Plate</StyledTableCell>
-                <StyledTableCell align="center">Plug Type</StyledTableCell>
-                <StyledTableCell align="center">Details</StyledTableCell>
-                <StyledTableCell align="center">Chargers</StyledTableCell>
-                <StyledTableCell align="center">Booking</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {cars.map((car) => (
-                <StyledTableRow key={car.plate}>
-                  <StyledTableCell component="th" scope="car"  align="center">
-                    {car.plate}
-                  </StyledTableCell>
+        {/*<h1 className='mycars-h1'>*/}
+        {/*  My Cars*/}
+        {/*</h1>*/}
+        <br/>
+        <Typography level="h1">My Cars</Typography>
 
-                  <StyledTableCell align="center">{car.plug}</StyledTableCell>
+        {/*<TableContainer className='mycars-container' component={Paper}>*/}
+        {/*  <Table className='mycars-table' sx={{ minWidth: 550 }} aria-label="custom table">*/}
+        {/*    <TableHead>*/}
+        {/*      <TableRow>*/}
+        {/*        <StyledTableCell align="center">Plate</StyledTableCell>*/}
+        {/*        <StyledTableCell align="center">Plug Type</StyledTableCell>*/}
+        {/*        <StyledTableCell align="center">Details</StyledTableCell>*/}
+        {/*        <StyledTableCell align="center">Chargers</StyledTableCell>*/}
+        {/*        <StyledTableCell align="center">Booking</StyledTableCell>*/}
+        {/*      </TableRow>*/}
+        {/*    </TableHead>*/}
+        {/*    <TableBody>*/}
+        {/*      {cars.map((car) => (*/}
+        {/*        <StyledTableRow key={car.plate}>*/}
+        {/*          <StyledTableCell component="th" scope="car"  align="center">*/}
+        {/*            {car.plate}*/}
+        {/*          </StyledTableCell>*/}
 
-                  <StyledTableCell align="center">
-                    <Button variant="contained" onClick={()=>{handleEdit(car)}}>
-                      Details
-                    </Button>
-                  </StyledTableCell>
+        {/*          <StyledTableCell align="center">{car.plug}</StyledTableCell>*/}
 
-                  <StyledTableCell align="center">
-                    <Button variant="contained"
-                            onClick={() => {
-                              getSpecificUserPlugs(car.id);
-                            }}
-                    >
-                      <a className='mycars-a' >View chargers</a>
-                    </Button>
-                  </StyledTableCell>
-                  
-                  {car.bookingId === null  ? (
-                    <StyledTableCell align="center">No booking available</StyledTableCell>
-                  ):(
-                    <StyledTableCell align="center">
-                      <Button variant="contained"
-                      onClick={() =>{
-                          saveBookingId(car.bookingId)
-                          getSpecificUserPlugs(car.id);
+        {/*          <StyledTableCell align="center">*/}
+        {/*            <Button variant="contained" onClick={()=>{handleEdit(car)}}>*/}
+        {/*              Details*/}
+        {/*            </Button>*/}
+        {/*          </StyledTableCell>*/}
+
+        {/*          <StyledTableCell align="center">*/}
+        {/*            <Button variant="contained"*/}
+        {/*                    onClick={() => {*/}
+        {/*                      getSpecificUserPlugs(car.id);*/}
+        {/*                    }}*/}
+        {/*            >*/}
+        {/*              <a className='mycars-a' >View chargers</a>*/}
+        {/*            </Button>*/}
+        {/*          </StyledTableCell>*/}
+
+        {/*          {car.bookingId === null  ? (*/}
+        {/*            <StyledTableCell align="center">No booking available</StyledTableCell>*/}
+        {/*          ):(*/}
+        {/*            <StyledTableCell align="center">*/}
+        {/*              <Button variant="contained"*/}
+        {/*              onClick={() =>{*/}
+        {/*                  saveBookingId(car.bookingId)*/}
+        {/*                  getSpecificUserPlugs(car.id);*/}
+        {/*              }}*/}
+        {/*              >*/}
+        {/*                <a className='mycars-a' href={"/EditBooking/"+car.bookingId}>View booking</a>*/}
+        {/*              </Button>*/}
+        {/*            </StyledTableCell>*/}
+        {/*          )}*/}
+
+        {/*        </StyledTableRow>*/}
+        {/*      ))}*/}
+        {/*    </TableBody>*/}
+        {/*  </Table>*/}
+        {/*</TableContainer>*/}
+        {/*<br/>*/}
+        {/*<Button color="success" variant="contained">*/}
+        {/*  <a className='mycars-a' href="/EditCar/">*/}
+        {/*    Add car*/}
+        {/*  </a>*/}
+        {/*</Button>*/}
+        <br />
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', maxWidth: '1200px', margin: '0 auto' }}>
+          {cars.map((item, index) => (
+              <Card key={index} variant="outlined" sx={{ width: 320, marginBottom: '1rem' }}>
+                <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
+                  {item.name}
+                </Typography>
+                <IconButton
+                    aria-label={`bookmark ${item.name}`}
+                    variant="plain"
+                    color="neutral"
+                    size="sm"
+                    sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+                >
+                  {/*<BookmarkAdd />*/}
+                </IconButton>
+                <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
+                  <img src={item.imgUrl} srcSet={`${item.imgUrl} 2x`} loading="lazy" alt="" />
+                </AspectRatio>
+                <Box sx={{ display: 'flex' }}>
+                  <div>
+                    <Typography level="body3">Plate:</Typography>
+                    <Typography fontSize="lg" fontWeight="lg">
+                      {item.plate}
+                    </Typography>
+                  </div>
+                  <Button
+                      variant="solid"
+                      size="sm"
+                      color="success"
+                      aria-label={`Explore ${item.title}`}
+                      sx={{ ml: 'auto', fontWeight: 600 }}
+                      onClick={()=>{handleEdit(item)}}
+                  >
+                    Details
+                  </Button>
+                </Box>
+                <br />
+                <Box sx={{ display: 'flex' }}>
+                  <div>
+                    <Typography level="body3">PlugType:</Typography>
+                    <Typography fontSize="lg" fontWeight="lg">
+                      {item.plug}
+                    </Typography>
+                  </div>
+                  <Button
+                      variant="solid"
+                      size="sm"
+                      color="success"
+                      aria-label={`Explore ${item.title}`}
+                      sx={{ ml: 'auto', fontWeight: 600 }}
+                      onClick={() => {
+                        getSpecificUserPlugs(item.id);
                       }}
-                      >
-                        <a className='mycars-a' href={"/EditBooking/"+car.bookingId}>View booking</a>
-                      </Button>
-                    </StyledTableCell>
+                  >
+                    <a className='mycars-a' >view chargers</a>
+                  </Button>
+                </Box>
+                <br />
+                <Box>
+                  {item.bookingId !== null  ? (
+                  <Button
+                      variant="solid"
+                      size="sm"
+                      color="success"
+                      aria-label={`Explore ${item.title}`}
+                      sx={{ ml: 'auto', fontWeight: 600, height: 46 }}
+                      onClick={() =>{
+                        saveBookingId(item.bookingId)
+                        getSpecificUserPlugs(item.id);
+                      }}
+                  >
+                    <a className='mycars-a' href={"/EditBooking/"+item.bookingId}>view bookings</a>
+                  </Button>) : (
+                  <Typography level="body3" sx={{ mt: 2.5 }}>No booking available</Typography>
                   )}
-
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <br/><br/>
-        <Button color="success" variant="contained">
+                </Box>
+              </Card>
+          ))}
+        </div>
+        <br />
+        <Button variant="solid"
+                size="sm"
+                color="success"
+                aria-label={`Add car`}
+                sx={{ ml: 'auto', fontWeight: 600, height: 46 }}>
           <a className='mycars-a' href="/EditCar/">
             Add car
           </a>
         </Button>
+        <br/><br/>
       </center>
     </div>
   );

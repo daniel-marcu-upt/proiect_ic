@@ -76,7 +76,8 @@ class StationController extends AbstractController
                     'name' => $station->getName(),
                     'plug' => $station->getPlugType(),
                     'price' => $station->getPrice(),
-                    'location' => $station->getLocation()
+                    'location' => $station->getLocation(),
+                    'imgUrl' => $station->getImgUrl(),
                 ];
             }, $stations)
         );
